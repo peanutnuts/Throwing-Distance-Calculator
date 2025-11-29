@@ -1,0 +1,82 @@
+#!/usr/bin/python3
+# SPDX-FIleCopyrightText: 2024 Ibuki Haga
+
+
+import math
+
+def throwdis(v0, theta, H, ground):
+    """
+    v0     : 初速度 (m/s)
+    theta  : 投げる角度 (rad)
+    H      : 投げる高さ (m)
+    ground : 地面の傾き (rad)
+    """
+    
+    t = 0.0     #time
+    g = 9.806   #重力加速度
+
+    while True:
+        x = v0 * math.cos(theta) * t
+        y = H + v0 * math.sin(theta) * t - 0.5 * g * t * t
+        
+        y_ground = math.tan(ground) * x
+
+        # 地面と衝突した瞬間
+        if y <= y_ground and t > 0:
+            print(f"到達距離: {x:.3f} m")
+            print(f"落下時間: {t:.3f} s")
+            
+            vx = v0 * math.cos(theta)
+            vy = v0 * math.sin(theta) - g * t
+            radangle = math.atan2(vy, vx)
+            degangle = radangle * 180 / math.pi
+
+            print(f"落下時の進行角度: {degangle:.3f} 度")
+            return
+
+        if t >= 3600:
+            print("飛翔時間が1時間を超過。計算を終了します。")
+            return
+
+        t += 0.001
+
+
+v0 = float(input("初速度 V0 (m/s) を入力してください： "))
+
+theta_deg = float(input("投げる角度 θ (度) を入力してください： "))
+theta = math.radians(theta_deg)
+
+H = float(input("高さ H (m) を入力してください： "))
+
+ground_deg = float(input("地面の傾き grand (度) を入力してください： "))
+ground = math.radians(ground_deg)
+
+throwdis(v0, theta, H, ground)
+
+'''
+import sys
+
+throwdis(
+V0	#初速度		(m/s)
+theta	#投げる角度	(rad)
+H	#地面からの高さ	(m)
+grand	#地面の角度	(rad)
+){
+t=0
+g=9.806
+int main
+	x(t) = v0cos(θ)t
+	y(t) = H + v0sin(θ)t - gt^2
+	if [y(t)] <= [tan(grand) * x(t)]:
+		print(到達距離 %d m, x(t))
+		print(落下時間 %d s, t)
+		vx(t) = v0cos(θ)
+		vy(t) = v0sin(θ) - gt
+		print(落下時の進行角度 %d rad, tan^-1(vy(t)/vx(t)))
+		return 0
+	if t >= 3600:
+		print(飛翔時間が1時間を超過。計算を終了します。)
+		return 0
+	t += 0.01
+}
+'''
