@@ -1,82 +1,61 @@
 #!/usr/bin/python3
 # SPDX-FIleCopyrightText: 2024 Ibuki Haga
-
+# SPDX-License-Identifier: BSD-3-Clause
 
 import math
 
-def throwdis(v0, theta, H, ground):
+def throwdis(v0, theta_rad, H, ground_rad):
     """
-    v0     : 初速度 (m/s)
-    theta  : 投げる角度 (rad)
-    H      : 投げる高さ (m)
-    ground : 地面の傾き (rad)
+    v0         : 初速度        (m/s)
+    theta_rad  : 投げる角度    (rad)
+    H          : 投げる高さ    (m)
+    ground_rad : 地面の傾き    (rad)  ※正なら上り坂、負なら下り坂
     """
-    
-    t = 0.0     #time
-    g = 9.806   #重力加速度
+
+    t = 0.0
+    g = 9.806   # 重力加速度
+    dt = 0.001  # 時間刻み（1ms）
 
     while True:
-        x = v0 * math.cos(theta) * t
-        y = H + v0 * math.sin(theta) * t - 0.5 * g * t * t
-        
-        y_ground = math.tan(ground) * x
+        x = v0 * math.cos(theta_rad) * t
+        y = H + v0 * math.sin(theta_rad) * t - 0.5 * g * t * t
 
-        # 地面と衝突した瞬間
-        if y <= y_ground and t > 0:
-            print(f"到達距離: {x:.3f} m")
-            print(f"落下時間: {t:.3f} s")
-            
-            vx = v0 * math.cos(theta)
-            vy = v0 * math.sin(theta) - g * t
-            radangle = math.atan2(vy, vx)
-            degangle = radangle * 180 / math.pi
+        # 斜面の高さ
+        y_ground = math.tan(ground_rad) * x
 
-            print(f"落下時の進行角度: {degangle:.3f} 度")
+        # 衝突判定
+        if y < y_ground:
+            print(f"到達距離          : {x:.3f} m")
+            print(f"落下時間          : {t:.3f} s")
+
+            vx = v0 * math.cos(theta_rad)
+            vy = v0 * math.sin(theta_rad) - g * t
+            angle_rad = math.atan2(vy, vx)
+            angle_deg = math.degrees(angle_rad)
+
+            print(f"落下時の進行角度  : {angle_deg:.3f} deg")
             return
 
-        if t >= 3600:
-            print("飛翔時間が1時間を超過。計算を終了します。")
+        # 異常（落下しない）
+        if t >= 60:
+            print("飛翔時間が60秒を超過。計算を終了します。")
             return
 
-        t += 0.001
+        t += dt
 
 
-v0 = float(input("初速度 V0 (m/s) を入力してください： "))
+# ---- 標準入力 ----
+v0 = float(input("初速度 (m/s) を入力してください： "))
 
-theta_deg = float(input("投げる角度 θ (度) を入力してください： "))
-theta = math.radians(theta_deg)
+theta_deg = float(input("投げる角度 (deg) を入力してください： "))
+theta_rad = math.radians(theta_deg)
 
-H = float(input("高さ H (m) を入力してください： "))
+H = float(input("高さ (m) を入力してください： "))
+while True:
+    ground_deg = float(input("地面の傾き (deg) を入力してください： "))
+    if -85 <= ground_deg <= 85:
+        break
+    print("地面の角度は85(deg) ~ -85(deg) の範囲で入力してください。")
+ground_rad = math.radians(ground_deg)
 
-ground_deg = float(input("地面の傾き grand (度) を入力してください： "))
-ground = math.radians(ground_deg)
-
-throwdis(v0, theta, H, ground)
-
-'''
-import sys
-
-throwdis(
-V0	#初速度		(m/s)
-theta	#投げる角度	(rad)
-H	#地面からの高さ	(m)
-grand	#地面の角度	(rad)
-){
-t=0
-g=9.806
-int main
-	x(t) = v0cos(θ)t
-	y(t) = H + v0sin(θ)t - gt^2
-	if [y(t)] <= [tan(grand) * x(t)]:
-		print(到達距離 %d m, x(t))
-		print(落下時間 %d s, t)
-		vx(t) = v0cos(θ)
-		vy(t) = v0sin(θ) - gt
-		print(落下時の進行角度 %d rad, tan^-1(vy(t)/vx(t)))
-		return 0
-	if t >= 3600:
-		print(飛翔時間が1時間を超過。計算を終了します。)
-		return 0
-	t += 0.01
-}
-'''
+throwdis(v0, theta_rad, H, ground_rad)
