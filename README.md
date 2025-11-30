@@ -12,7 +12,7 @@ throwdis コマンドを提供します。
 を出力します.
 
 # throwdisコマンド
-![test]()
+![test]([![test](https://github.com/peanutnuts/Throwing-Distance-Calculator/actions/workflows/test.yml/badge.svg)](https://github.com/peanutnuts/Throwing-Distance-Calculator/actions/workflows/test.yml))
 
 
 ## リポジトリの入手
