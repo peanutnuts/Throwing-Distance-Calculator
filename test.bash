@@ -2,14 +2,22 @@
 # SPDX-FIleCopyrightText: 2025 Ibuki Haga
 
 ng () {
-        echo ${1}行目が違うよ
-	res=1
+        echo "${1}行目が違うよ"
+        res=1
 }
 
 res=0
 
-out=$(python3 throwdis)
-[ "${out}" = 15.0 ] || ng "$LINENO"
+# 入力を与えて throwdis を実行
+out=$(printf "10\n45\n1\n0\n" | python3 throwdis)
 
-[ "${out}" = 15.0 ] && echo OK
+# 期待される出力
+expected="到達距離          : 10.195 m
+落下時間          : 1.442 s
+落下時の進行角度  : -45.000 deg"
+
+# 比較
+[ "$out" = "$expected" ] || ng "$LINENO"
+
+[ $res -eq 0 ] && echo OK
 exit $res
