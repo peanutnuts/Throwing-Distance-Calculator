@@ -12,9 +12,9 @@ res=0
 out=$(printf "10\n45\n1\n0\n" | python3 throwdis)
 
 # 期待される出力
-expected="到達距離          : 10.195 m
-落下時間          : 1.442 s
-落下時の進行角度  : -45.000 deg"
+expected="到達距離          : 11.116 m
+落下時間          : 1.572 s
+落下時の進行角度  : -49.720 deg"
 
 # 比較
 [ "$out" = "$expected" ] || ng "$LINENO"
