@@ -8,7 +8,7 @@ ng () {
 
 res=0
 
-out=$(seq 5 | ./plus)
+out=$(python3 throwdis)
 [ "${out}" = 15.0 ] || ng "$LINENO"
 
 [ "${out}" = 15.0 ] && echo OK
