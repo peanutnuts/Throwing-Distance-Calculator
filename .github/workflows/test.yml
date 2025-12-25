@@ -1,3 +1,6 @@
+# SPDX-FIleCopyrightText: 2025 Ibuki Haga
+# SPDX-License-Identifier: BSD-3-Clause
+
 name: test
 on: push
 jobs:
