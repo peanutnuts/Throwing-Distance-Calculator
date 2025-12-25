@@ -1,23 +1,25 @@
+# SPDX-FIleCopyrightText: 2025 Ibuki Haga
+# SPDX-License-Identifier: BSD-3-Clause
+
 # Throwing-Distance-Calculator
+[![test](https://github.com/peanutnuts/Throwing-Distance-Calculator/actions/workflows/test.yml/badge.svg)](https://github.com/peanutnuts/Throwing-Distance-Calculator/actions/workflows/test.yml)
+
+# throwdis() コマンド
 throwdis コマンドを提供します。
 物を投げたときの
-	角度
-	初速度
-	投げた高さ
-	地面の傾斜
+        角度
+        初速度
+        投げた高さ
+        地面の傾斜
 から，重力加速度0.906 m/s においての
-	到達する水平距離
-	落下する時間
-	落下したときの進行角度
+        到達する水平距離
+        落下する時間
+        落下したときの進行角度
 を出力します.
-
-# throwdisコマンド
-
-[![test](https://github.com/peanutnuts/Throwing-Distance-Calculator/actions/workflows/test.yml/badge.svg)](https://github.com/peanutnuts/Throwing-Distance-Calculator/actions/workflows/test.yml)
 
 ## リポジトリの入手
 リポジトリを保存したいディレクトリにて，
-	$ git clone 
+	git clone https://github.com/peanutnuts/Throwing-Distance-Calculator 
 と入力してください。
 
 ## 使い方
@@ -45,9 +47,8 @@ throwdis コマンドを提供します。
 ※　地面に到達するときの速度が早すぎると，結果の誤差が大きくなります。
 
 ## 環境
+powershell
 
-
-## テスト結果
 
 ## 権利関係
 このソフトウェアパッケージは，3条項BSDライセンスの下，再頒布および使用が許可されます。
