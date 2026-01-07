@@ -18,14 +18,14 @@ throwdis コマンドを提供します。
 半角英数字で以下を入力してください。
 
 	$ cd Throwing-Distance-Calculator
-	$ ./throwdis <初速度`v0`> <発射角度`throw_deg`> <初期高さ`h`>
+	$ ./throwdis v0 throw_deg h
 
 入力された値から計算を行い，以下を出力し，コマンドを終了します。
 
-	<到達距離`x`(m)>
-	<着地時間`t`(s)>
-	<着地速度`v`(m/s)>
-	<着地角度`landing_deg`(deg)>
+	x
+	t
+	v
+	landing_deg
 
 例）初速度`v0 = 10`, 発射角度`throw_deg = 45`, 初期高さ`h = 1` の場合，
 
