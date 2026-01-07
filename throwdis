@@ -5,12 +5,11 @@
 import sys
 import math
 
-def throwdis(v0, theta_rad, H):
+def throwdis(v0, throw_rad, h):
     """
     v0         : 初速度        (m/s)
-    theta_rad  : 投げる角度    (rad)
-    H          : 投げる高さ    (m)
-    ground_rad : 地面の傾き    (rad)  ※正なら上り坂、負なら下り坂
+    throw_rad  : 投げる角度    (rad)
+    h          : 投げる高さ    (m)
     """
 
     t = 0.0
@@ -18,22 +17,22 @@ def throwdis(v0, theta_rad, H):
     dt = 0.001  # 時間刻み（1ms）
 
     while True:
-        y = H + v0 * math.sin(theta_rad) * t - 0.5 * g * t * t
+        y = h + v0 * math.sin(throw_rad) * t - 0.5 * g * t * t
 
         if y < 0:
-            x = v0 * math.cos(theta_rad) * t
+            x = v0 * math.cos(throw_rad) * t
             print(f"{x:.3f}")
             print(f"{t:.3f}")
 
-            vx = v0 * math.cos(theta_rad)
-            vy = v0 * math.sin(theta_rad) - g * t
+            vx = v0 * math.cos(throw_rad)
+            vy = v0 * math.sin(throw_rad) - g * t
 
-            v = math.sqrt(vx**2 + vy**2)
+            v = math.hypot(vx, vy)
             print(f"{v:.3f}")
 
-            angle_rad = math.atan2(vy, vx)
-            angle_deg = math.degrees(angle_rad)
-            print(f"{angle_deg:.3f}")
+            landing_rad = math.atan2(vy, vx)
+            landing_deg = math.degrees(landing_rad)
+            print(f"{landing_deg:.3f}")
             return
 
         if t >= 60:
@@ -41,10 +40,10 @@ def throwdis(v0, theta_rad, H):
         t += dt
 
 v0 = float(sys.argv[1])
-theta_deg = float(sys.argv[2])
-theta_rad = math.radians(theta_deg)
-H = float(sys.argv[3])
-if H < 0:
+throw_deg = float(sys.argv[2])
+throw_rad = math.radians(throw_deg)
+h = float(sys.argv[3])
+if h < 0:
     sys.exit(1)
 
-throwdis(v0, theta_rad, H)
+throwdis(v0, throw_rad, h)
