@@ -1,6 +1,8 @@
 #!/bin/bash -vx
-# SPDX-FIleCopyrightText: 2025 Ibuki Haga
+# SPDX-FileCopyrightText: 2026 Ibuki Haga
 # SPDX-License-Identifier: BSD-3-Clause
+
+set -e
 
 ng () {
     echo "${1}行目が違うよ"
@@ -10,7 +12,7 @@ ng () {
 res=0
 
 # throwdis を実行してプロンプト行を除外
-out=$(./throwdis 10 45 1 0 | grep -E "到達距離|落下時間|進行角度")
+out=$(./throwdis 10 45 1)
 
 expected="11.116
 1.572

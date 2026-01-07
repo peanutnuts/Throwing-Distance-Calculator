@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-# SPDX-FIleCopyrightText: 2025 Ibuki Haga
+# SPDX-FileCopyrightText: 2026 Ibuki Haga
 # SPDX-License-Identifier: BSD-3-Clause
 
 import sys
 import math
 
-def throwdis(v0, theta_rad, H, ground_rad):
+def throwdis(v0, theta_rad, H):
     """
     v0         : 初速度        (m/s)
     theta_rad  : 投げる角度    (rad)
@@ -21,11 +21,7 @@ def throwdis(v0, theta_rad, H, ground_rad):
         x = v0 * math.cos(theta_rad) * t
         y = H + v0 * math.sin(theta_rad) * t - 0.5 * g * t * t
 
-        # 斜面の高さ
-        y_ground = math.tan(ground_rad) * x
-
-        # 衝突判定
-        if y < y_ground:
+        if y < 0:
             print(f"{x:.3f}")
             print(f"{t:.3f}")
 
@@ -37,41 +33,15 @@ def throwdis(v0, theta_rad, H, ground_rad):
             print(f"{angle_deg:.3f}")
             return
 
-        # 異常（落下しない）
         if t >= 60:
-            print("errpr:飛翔時が60秒を超過。計算を終了します。")
-            return
+            sys.exit(1)
         t += dt
-
-'''
-# ---- 標準入力 ----
-v0 = float(input("初速度 (m/s) を入力してください： "))
-
-theta_deg = float(input("投げる角度 (deg) を入力してください： "))
-theta_rad = math.radians(theta_deg)
-
-H = float(input("高さ (m) を入力してください： "))
-while True:
-    ground_deg = float(input("地面の傾き (deg) を入力してください： "))
-    if -85 <= ground_deg <= 85:
-        break
-    print("地面の角度は85(deg) ~ -85(deg) の範囲で入力してください。")
-ground_rad = math.radians(ground_deg)
-
-throwdis(v0, theta_rad, H, ground_rad)
-'''
 
 v0 = float(sys.argv[1])
 theta_deg = float(sys.argv[2])
 theta_rad = math.radians(theta_deg)
 H = float(sys.argv[3])
 if H < 0:
-    print("error:投げる高さは０以上にしてください。")
     sys.exit(1)
-ground_deg = float(sys.argv[4])
-if ground_deg < -85 or ground_deg > 85:
-    print("error:地面の角度は85(deg) ~ -85(deg) の範囲で入力してください。")
-    sys.exit(1)
-ground_rad = math.radians(ground_deg)
 
-throwdis(v0, theta_rad, H, ground_rad)
+throwdis(v0, theta_rad, H)
