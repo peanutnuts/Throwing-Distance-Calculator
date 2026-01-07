@@ -22,5 +22,16 @@ expected="11.116
 # 比較
 [ "$out" = "$expected" ] || ng "$LINENO"
 
+# ===== 異常入力テスト =====
+
+# あ：失敗すること
+( ./throwdis あ 45 1 ) && ng "$LINENO" || true
+
+# a：失敗すること
+( ./throwdis a 45 1 ) && ng "$LINENO" || true
+
+# 何も入力なし：失敗すること
+( ./throwdis ) && ng "$LINENO" || true
+
 [ $res -eq 0 ] && echo OK
 exit $res
