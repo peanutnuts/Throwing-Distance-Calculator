@@ -13,6 +13,9 @@ res=0
 
 # throwdis を実行してプロンプト行を除外
 out=$(./throwdis 10 45 1)
+rc=$?
+
+[ $rc -eq 0 ] || ng "$LINENO"
 
 expected="11.116
 1.572
