@@ -18,18 +18,21 @@ def throwdis(v0, theta_rad, H):
     dt = 0.001  # 時間刻み（1ms）
 
     while True:
-        x = v0 * math.cos(theta_rad) * t
         y = H + v0 * math.sin(theta_rad) * t - 0.5 * g * t * t
 
         if y < 0:
+            x = v0 * math.cos(theta_rad) * t
             print(f"{x:.3f}")
             print(f"{t:.3f}")
 
             vx = v0 * math.cos(theta_rad)
             vy = v0 * math.sin(theta_rad) - g * t
+
+            v = math.sqrt(vx**2 + vy**2)
+            print(f"{v:.3f}")
+
             angle_rad = math.atan2(vy, vx)
             angle_deg = math.degrees(angle_rad)
-
             print(f"{angle_deg:.3f}")
             return
 
