@@ -1,7 +1,9 @@
 [![test](https://github.com/peanutnuts/Throwing-Distance-Calculator/actions/workflows/test.yml/badge.svg)](https://github.com/peanutnuts/Throwing-Distance-Calculator/actions/workflows/test.yml)
 
-# throwdis() コマンド
+# throwdisコマンド
 throwdis コマンドを提供します。
+
+入力に応じて，物を投げた際の挙動を計算し出力します。
 
 入力は，物を投げた際の，
 - 初速度`v0`(m/s)
