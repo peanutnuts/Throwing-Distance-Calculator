@@ -26,7 +26,7 @@
   
 これらを以下のように入力してください。
 
-### input_file.txt
+**input_file.txt**
 ```input_file.txt
 v0
 throw_deg
@@ -35,7 +35,7 @@ h
 
 ファイルを用意したら，コマンドを起動します。半角英数字で以下を入力してください。
 
-### bash
+**bash**
 ```bash
 $ cd Throwing-Distance-Calculator
 $ ./throwdis < input_file.txt
@@ -54,7 +54,7 @@ $ ./throwdis < input_file.txt
 
 これらを以下のように出力します。
 
-### bash
+**bash**
 ```bash
 x
 t
@@ -67,7 +67,7 @@ landing_deg
 例えば`v0 = 10`，`throw_deg = 45`，`h = 1`，としたい場合は，
 `input_file.txt`は以下のようになります。
 
-### input_file.txt
+**input_file.txt**
 ```input_file.txt
 10
 45
@@ -77,7 +77,7 @@ landing_deg
 コマンドを起動すると
 以下のように出力します。
 
-### bash
+**bash**
 ```bash
 11.116
 1.572
