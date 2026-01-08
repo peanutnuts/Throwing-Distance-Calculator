@@ -39,11 +39,17 @@ def throwdis(v0, throw_rad, h):
             sys.exit(1)
         t += dt
 
-v0 = float(sys.argv[1])
-throw_deg = float(sys.argv[2])
-throw_rad = math.radians(throw_deg)
-h = float(sys.argv[3])
+# 標準入力
+data = sys.stdin.read().split()
+if len(data) != 3:
+    sys.exit(1)
+
+v0 = float(data[0])
+throw_deg = float(data[1])
+h = float(data[2])
+
 if h < 0:
     sys.exit(1)
 
+throw_rad = math.radians(throw_deg)
 throwdis(v0, throw_rad, h)
