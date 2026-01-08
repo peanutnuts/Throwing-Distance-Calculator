@@ -11,8 +11,9 @@ ng () {
 
 res=0
 
-# throwdis を実行してプロンプト行を除外
-out=$(./throwdis 10 45 1)
+# ===== 正常入力テスト =====
+
+out=$(echo "10 45 1" | ./throwdis)
 
 rc=$?
 [ $rc -eq 0 ] || ng "$LINENO"
@@ -21,24 +22,25 @@ expected="11.116
 1.572
 10.937
 -49.720"
+
 [ "$out" = "$expected" ] || ng "$LINENO"
 
 # ===== 異常入力テスト =====
 
-# h < 0 である
-(./throwdis 10 45 -1) && ng "$LINENO" || true
+# h < 0
+(echo "10 45 -1" | ./throwdis) && ng "$LINENO"
 
 # tが60(s)以上になる
-(./throwdis 1000 45 10000) && ng "$LINENO" || true
+(echo "1000 45 10000" | ./throwdis) && ng "$LINENO"
 
-# あ
-( ./throwdis あ 45 1 ) && ng "$LINENO" || true
+# 入力あ
+(echo "あ 45 1" | ./throwdis) && ng "$LINENO"
 
-# a
-( ./throwdis a 45 1 ) && ng "$LINENO" || true
+# 入力a
+(echo "a 45 1" | ./throwdis) && ng "$LINENO"
 
-# 何も入力なし
-( ./throwdis ) && ng "$LINENO" || true
+# 入力なし
+(./throwdis < /dev/null) && ng "$LINENO"
 
 [ $res -eq 0 ] && echo OK
 exit $res
