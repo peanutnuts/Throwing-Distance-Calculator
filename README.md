@@ -1,47 +1,95 @@
 [![test](https://github.com/peanutnuts/Throwing-Distance-Calculator/actions/workflows/test.yml/badge.svg)](https://github.com/peanutnuts/Throwing-Distance-Calculator/actions/workflows/test.yml)
 
-# throwdisコマンド
+# throwdisコマンド説明
 throwdis コマンドを提供します。
 
 入力に応じて，物を投げた際の挙動を計算し出力します。
 
 入力は，物を投げた際の，
-- 初速度`v0`(m/s)
-- 発射角度`throw_deg`(deg)
-- 初期高さ`h`(m)
+- 初速度(m/s)	`v0`
+- 発射角度(deg)	`throw_deg`
+- 初期高さ(m)	`h`
 
 出力は，水平な地面，重力加速度9.806(m/s^2)における，
-- 到達する水平距離`x`(m)
-- 着地する時間`t`(s)
-- 着地時の速度`v`(m/s)
-- 着地時の進行角度`landing_deg`(deg)
+- 到達する水平距離(m)	`x`
+- 着地する時間(s)	`t`
+- 着地時の速度(m/s)	`v`
+- 着地時の進行角度(deg)	`landing_deg`
+
+となります。
 
 # 使い方
+1. 入力ファイルの用意
+
+まず入力に使う任意のファイル(以下`input_file.txt`)を用意します。
+
+- 初速度(m/s)	`v0`  
+- 発射角度(deg)	`throw_deg`  
+- 初期高さ(m)	`h`
+  
+これらを以下のように入力してください。
+
+```input_file.txt
+v0
+throw_deg
+h
+```
+
+例えば`v0 = 10`，`throw_deg = 45`，`h = 1`，としたい場合は，  
+以下のような入力になります。
+
+```input_file.txt
+10
+45
+1
+```
+
+2. コマンドの起動
+
 半角英数字で以下を入力してください。
 
-	$ cd Throwing-Distance-Calculator
-	$ ./throwdis v0 throw_deg h
+```bash
+$ cd Throwing-Distance-Calculator
+$ ./throwdis < input_file.txt
+```
 
-入力された値から計算を行い，以下を出力し，コマンドを終了します。
+`throwdis`と`input_file.txt` が現在のディレクトリに存在することを確認するか，それぞれのパスを明示的に指定してください。
 
-	x
-	t
-	v
-	landing_deg
+3. 出力
 
+入力された`input_file.txt`から計算を行い，
 
-例）初速度`v0 = 10`, 発射角度`throw_deg = 45`, 初期高さ`h = 1` の場合，
+- 到達する水平距離(m)   `x`
+- 着地する時間(s)       `t`
+- 着地時の速度(m/s)     `v`
+- 着地時の進行角度(deg) `landing_deg`
 
-	$ ./throwdis 10 45 1
+これらを以下のように出力します。
 
-と入力すると
+```bash
+x
+t
+v
+landing_deg
+```
 
-	11.116
-	1.572
-	10.937
-	-49.720
+例えば`input_file.txt`が
 
-と出力されます。
+```input_file.txt
+10
+45
+1
+```
+
+の場合，
+以下のように出力します。
+
+```bash
+11.116
+1.572
+10.937
+-49.720
+```
 
 # 注意点
 - 発射角度`throw_deg`，着地時の進行角度`landing_deg`，の入力について，水平方向を角度0°とし、上向きの角度を正、下向きの角度を負としてください。
