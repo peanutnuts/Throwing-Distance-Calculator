@@ -4,12 +4,12 @@
 ## コマンド説明
 入力に応じて，物を投げた際の挙動を計算し出力します。
 
-入力は，物を投げた際の
+入力は，物を投げた際の以下3項目です。
 - `v0`		初速度(m/s)
 - `throw_deg`	発射角度(deg)
 - `h`		初期高さ(m)
 
-出力は，水平な地面，重力加速度9.806(m/s^2)における，
+出力は，水平な地面，重力加速度9.806(m/s^2)における，以下4項目です。
 - `x`		到達する水平距離(m)
 - `t`		着地する時間(s)
 - `v`		着地時の速度(m/s)
@@ -17,8 +17,13 @@
 
 ---
 ## 使い方
+リポジトリを入手します。
 
-まず入力に使う任意のファイル(以下`input_file.txt`)を用意します。
+**bash**
+``` bash
+$ git clone git@github.com:peanutnuts/Throwing-Distance-Calculator.git
+```
+入力に使う任意のファイル(以下`input_file.txt`)を用意します。
 
 - `v0`          初速度(m/s)
 - `throw_deg`   発射角度(deg)
@@ -33,7 +38,8 @@ throw_deg
 h
 ```
 
-ファイルを用意したら，コマンドを起動します。半角英数字で以下を入力してください。
+ファイルを用意したら，コマンドを実行します。
+`throwdis`と`input_file.txt` が同じディレクトリに存在する場合，以下のように入力してください。
 
 **bash**
 ```bash
@@ -41,11 +47,9 @@ $ cd Throwing-Distance-Calculator
 $ ./throwdis < input_file.txt
 ```
 
-このコマンドは，  
-`throwdis`と`input_file.txt` が現在のディレクトリに存在する場合です。  
-`input_file.txt`が別のディレクトリにある場合，パスを明示的に指定してください。
+`throwdis`と`input_file.txt`が別のディレクトリにある場合は，パスを明示的に指定してください。
 
-入力された`input_file.txt`から計算を行い，
+コマンドを実行すると，入力された`input_file.txt`から計算を行い，
 
 - `x`		到達する水平距離(m)
 - `t`		着地する時間(s)
